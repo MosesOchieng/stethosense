@@ -10,30 +10,70 @@ import {
   CircleDot,
   Cpu,
   HeartPulse,
+  Image as ImageIcon,
   Menu,
   Mic2,
+  Plug,
   Radio,
   ShieldCheck,
   Signal,
   Sparkles,
   Stethoscope,
+  Smartphone,
+  UserRound,
   X,
   Zap,
 } from "lucide-react";
 
 const navItems = [
-  ["Story", "story"],
   ["How it works", "workflow"],
   ["Technology", "technology"],
   ["Field care", "field"],
 ];
 
-const workflow = [
-  { n: "01", title: "Listen", text: "Use it exactly as you always have.", icon: Stethoscope },
-  { n: "02", title: "Capture", text: "MEMS microphones preserve heart and lung sounds.", icon: Mic2 },
-  { n: "03", title: "Clean", text: "Adaptive DSP removes noise without hiding signal.", icon: Radio },
-  { n: "04", title: "Understand", text: "Embedded AI surfaces patterns worth a closer look.", icon: BrainCircuit },
-  { n: "05", title: "Act", text: "Review, record, and share a clearer next step.", icon: HeartPulse },
+const workflowSteps = [
+  {
+    n: "01",
+    title: "Start with your stethoscope",
+    text: "Use your existing acoustic stethoscope exactly as you normally would.",
+    icon: Stethoscope,
+    imageLabel: "Your existing acoustic stethoscope",
+  },
+  {
+    n: "02",
+    title: "Plug in StethoSense",
+    text: "Replace the conventional Y-connector with the StethoSense smart Y-connector. No new stethoscope or complicated installation required.",
+    icon: Plug,
+    imageLabel: "StethoSense smart Y-connector",
+  },
+  {
+    n: "03",
+    title: "Create your Doctor account",
+    text: "Download the StethoSense Doctor App, create an account, and connect your StethoSense device via Bluetooth.",
+    icon: UserRound,
+    imageLabel: "Doctor App account setup",
+  },
+  {
+    n: "04",
+    title: "Measure the patient",
+    text: "Place the chestpiece on the patient's chest and listen normally. StethoSense simultaneously captures and digitizes the heart or lung sounds.",
+    icon: HeartPulse,
+    imageLabel: "Clinician measuring a patient",
+  },
+  {
+    n: "05",
+    title: "Enhanced sound + AI analysis",
+    text: "The device cleans and enhances the recording, reducing environmental noise and improving sound quality before AI-assisted analysis identifies patterns that may require attention.",
+    icon: BrainCircuit,
+    imageLabel: "Enhanced waveform and AI analysis",
+  },
+  {
+    n: "06",
+    title: "Review on the Doctor App",
+    text: "The doctor sees the waveform, enhanced audio, AI analysis, confidence indicators and recording history on the app, helping them make a more informed clinical assessment or referral decision.",
+    icon: Smartphone,
+    imageLabel: "Doctor reviewing results in the app",
+  },
 ];
 
 const specs = [
@@ -84,7 +124,7 @@ export function StethoSenseLanding() {
           <p className="ss-rise mb-6 flex items-center gap-2 text-[11px] font-bold uppercase tracking-[.24em] text-[#0e7370]"><span className="h-2 w-2 rounded-full bg-[#db8b5f]" /> A small upgrade to a vital ritual</p>
           <h1 className="ss-rise ss-delay-1 max-w-[560px] font-['Playfair_Display'] text-[clamp(3.3rem,7vw,6.7rem)] leading-[.91] tracking-[-.065em] text-[#102f3a]">Every heartbeat<br /><em className="font-normal text-[#0e7370]">tells a story.</em></h1>
           <p className="ss-rise ss-delay-2 mt-7 max-w-[520px] text-[15px] leading-7 text-[#53676b]">Across Africa, conventional stethoscope examinations can miss a significant number of cardiovascular conditions, particularly rheumatic heart disease. In a Ugandan study, traditional auscultation detected only <strong className="font-bold text-[#102f3a]">22.2% of definite rheumatic heart disease cases</strong>, meaning nearly <strong className="font-bold text-[#102f3a]">78% were missed</strong> compared with echocardiography. <strong className="font-bold text-[#102f3a]">StethoSense</strong> is a plug-and-play Y-connector addition to a standard stethoscope, adding digital sound capture and AI-assisted analysis without changing the familiar examination.</p>
-           <div className="ss-rise ss-delay-3 mt-9 flex flex-wrap items-center gap-3"><button type="button" onClick={() => go("workflow")} className="rounded-full bg-[#0e7370] px-6 py-3.5 text-sm font-bold text-white shadow-[0_10px_25px_rgba(14,115,112,.18)] transition-transform hover:-translate-y-1" data-testid="button-explore-workflow">Explore the difference <ArrowRight className="ml-2 inline" size={15} /></button><button type="button" onClick={() => go("story")} className="rounded-full border border-[#aebfba] px-6 py-3.5 text-sm font-bold text-[#102f3a] hover:bg-white" data-testid="button-story">Why it matters</button></div>
+           <div className="ss-rise ss-delay-3 mt-9 flex flex-wrap items-center gap-3"><button type="button" onClick={() => go("workflow")} className="rounded-full bg-[#0e7370] px-6 py-3.5 text-sm font-bold text-white shadow-[0_10px_25px_rgba(14,115,112,.18)] transition-transform hover:-translate-y-1" data-testid="button-explore-workflow">Explore the difference <ArrowRight className="ml-2 inline" size={15} /></button><button type="button" onClick={() => go("workflow")} className="rounded-full border border-[#aebfba] px-6 py-3.5 text-sm font-bold text-[#102f3a] hover:bg-white" data-testid="button-story">How it works</button></div>
           <div className="mt-12 flex flex-wrap gap-x-6 gap-y-3 text-[11px] font-medium text-[#637679]"><span className="flex items-center gap-2"><Check size={14} className="text-[#0e7370]" /> Offline-first</span><span className="flex items-center gap-2"><Check size={14} className="text-[#0e7370]" /> Bluetooth connected</span><span className="flex items-center gap-2"><Check size={14} className="text-[#0e7370]" /> Replaceable battery</span></div>
         </div>
         <div className="relative min-h-[430px] md:min-h-[580px]">
@@ -95,17 +135,46 @@ export function StethoSenseLanding() {
         </div>
       </section>
 
-      <section id="story" className="border-y border-[#dce2dd] bg-[#edece5]">
-        <div className="mx-auto grid max-w-[1240px] gap-10 px-5 py-20 md:grid-cols-[.85fr_1.15fr] md:px-8 md:py-28">
-          <div><p className="text-[11px] font-bold uppercase tracking-[.22em] text-[#0e7370]">The gap is audible</p><h2 className="mt-5 max-w-md font-['Playfair_Display'] text-4xl leading-[1.02] tracking-[-.04em] md:text-6xl">The stethoscope hasn’t changed much.<br /><span className="text-[#0e7370]">Healthcare has.</span></h2><p className="mt-7 max-w-sm text-sm leading-7 text-[#637679]">A quiet sound can be hard to hear consistently. A rural clinic may have no internet. A second opinion may be hours away. The tool should meet the moment.</p></div>
-          <div className="relative overflow-hidden rounded-[28px] bg-[#0b1115] shadow-[0_18px_50px_rgba(16,47,58,.14)]"><img src="/images/stethosense-device.png" alt="StethoSense intelligent stethoscope" className="h-full min-h-[360px] w-full object-cover" data-testid="image-device" /></div>
-          <div className="grid gap-3 sm:grid-cols-3 md:col-span-2">{[["Human hearing", "Subtle abnormalities can be difficult to identify consistently."], ["Limited specialist access", "Millions of patients are screened far from a specialist."], ["No digital record", "Traditional auscultation produces no recording or reusable data."]].map(([title, text], i) => <div key={title} className="rounded-2xl border border-[#d6ded9] bg-[#f8f7f2] p-5"><div className="mb-10 grid h-9 w-9 place-items-center rounded-full bg-[#dbece5] text-[#0e7370]">{i === 0 ? <CircleDot size={17} /> : i === 1 ? <ShieldCheck size={17} /> : <Signal size={17} />}</div><h3 className="font-bold text-[#102f3a]">{title}</h3><p className="mt-2 text-xs leading-5 text-[#637679]">{text}</p></div>)}</div>
-        </div>
-      </section>
+       <section id="workflow" className="border-y border-[#dce2dd] bg-[#edece5]">
+         <div className="mx-auto max-w-[1240px] px-5 py-20 md:px-8 md:py-28">
+           <div className="max-w-2xl">
+             <p className="text-[11px] font-bold uppercase tracking-[.22em] text-[#0e7370]">Simple by design</p>
+             <h2 className="mt-5 font-['Playfair_Display'] text-5xl leading-[.98] tracking-[-.05em] md:text-7xl">How StethoSense<br /><span className="text-[#0e7370]">works.</span></h2>
+             <p className="mt-7 max-w-xl text-sm leading-7 text-[#637679]">Keep the ritual you know. StethoSense adds a connected layer of capture, enhancement and clinical insight from the first listen to the final review.</p>
+           </div>
+           <div className="mt-16 space-y-16 md:mt-20 md:space-y-24">
+             {workflowSteps.map(({ n, title, text, icon: Icon, imageLabel }, index) => (
+               <article key={n} className={`grid items-center gap-8 md:gap-14 ${index % 2 === 0 ? "md:grid-cols-[.85fr_1.15fr]" : "md:grid-cols-[1.15fr_.85fr]"}`}>
+                 <div className={index % 2 === 0 ? "" : "md:order-2"}>
+                   <div className="flex items-center gap-3">
+                     <span className="font-['Space_Mono'] text-xs font-bold tracking-[.14em] text-[#0e7370]">{n}</span>
+                     <span className="h-px w-12 bg-[#b9cbc3]" />
+                     <Icon size={19} className="text-[#0e7370]" />
+                   </div>
+                   <h3 className="mt-5 max-w-lg font-['Playfair_Display'] text-3xl leading-[1.05] tracking-[-.035em] text-[#102f3a] md:text-4xl">{title}</h3>
+                   <p className="mt-5 max-w-lg text-sm leading-7 text-[#637679]">{text}</p>
+                 </div>
+                 <div
+                   role="img"
+                   aria-label={`Image placeholder: ${imageLabel}`}
+                   data-testid={`image-workflow-${n}`}
+                   className={`group relative flex min-h-[260px] items-center justify-center overflow-hidden rounded-[28px] border border-dashed border-[#91b0a7] bg-[#dce9e3] p-8 ${index % 2 === 0 ? "" : "md:order-1"}`}
+                 >
+                   <div className="absolute inset-4 rounded-[20px] border border-[#aac4ba]/70" />
+                   <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full border border-[#0e7370]/15 transition-transform duration-500 group-hover:scale-125" />
+                   <div className="relative text-center">
+                     <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[#f6f4ef]/80 text-[#0e7370] shadow-sm"><ImageIcon size={23} strokeWidth={1.5} /></div>
+                     <p className="mt-4 text-[11px] font-bold uppercase tracking-[.16em] text-[#0e7370]">Image place</p>
+                     <p className="mt-2 max-w-[210px] text-xs leading-5 text-[#637679]">{imageLabel}</p>
+                   </div>
+                 </div>
+               </article>
+             ))}
+           </div>
+         </div>
+       </section>
 
       <section id="workflow" className="bg-[#102f3a] text-[#edf4ee]"><div className="mx-auto max-w-[1240px] px-5 py-20 md:px-8 md:py-28"><div className="grid gap-10 md:grid-cols-[.8fr_1.2fr]"><div><p className="text-[11px] font-bold uppercase tracking-[.22em] text-[#8dd8ca]">One small upgrade</p><h2 className="mt-5 font-['Playfair_Display'] text-5xl leading-[.98] tracking-[-.05em] md:text-7xl">A smarter<br /><em className="font-normal text-[#8dd8ca]">stethoscope.</em></h2><p className="mt-7 max-w-sm text-sm leading-7 text-[#abc1bd]">StethoSense replaces the conventional Y-connector with a compact intelligent module that captures auscultation signals while preserving the clinician’s natural listening experience.</p></div><div className="flex items-center justify-center rounded-[28px] bg-[#173d49] p-8"><div className="flex w-full max-w-[560px] items-center justify-between gap-2 text-center">{["Listen", "Capture", "Clean", "Understand", "Insight"].map((x, i) => <div key={x} className="flex items-center gap-2"><div><div className={`mx-auto grid h-12 w-12 place-items-center rounded-2xl ${i === 4 ? "bg-[#0e7370] text-white" : "border border-[#4a6d73] text-[#8dd8ca]"}`}>{[<Stethoscope size={19} />, <Mic2 size={19} />, <Radio size={19} />, <Cpu size={19} />, <HeartPulse size={19} />][i]}</div><span className="mt-2 block text-[10px] text-[#abc1bd]">{x}</span></div>{i < 4 && <ChevronRight className="hidden text-[#668c8d] sm:block" size={15} />}</div>)}</div></div></div></div></section>
-
-      <section className="bg-[#f6f4ef]"><div className="mx-auto max-w-[1240px] px-5 py-20 md:px-8 md:py-28"><div className="mb-12 flex items-end justify-between gap-6"><div><p className="text-[11px] font-bold uppercase tracking-[.22em] text-[#0e7370]">A five-step rhythm</p><h2 className="mt-4 font-['Playfair_Display'] text-4xl tracking-[-.04em] md:text-6xl">How StethoSense works</h2></div><span className="hidden font-['Space_Mono'] text-xs text-[#79908e] md:block">01 — 05</span></div><div className="grid gap-3 md:grid-cols-5">{workflow.map(({ n, title, text, icon: Icon }) => <div key={n} className="group border-t-2 border-[#cbd7d0] py-5 transition-colors hover:border-[#0e7370]"><div className="flex items-center justify-between"><span className="font-['Space_Mono'] text-xs text-[#0e7370]">{n}</span><Icon size={20} className="text-[#78928e] transition-transform group-hover:-translate-y-1 group-hover:text-[#0e7370]" /></div><h3 className="mt-12 font-bold">{title}</h3><p className="mt-2 text-xs leading-5 text-[#637679]">{text}</p></div>)}</div></div></section>
 
       <section id="technology" className="bg-[#e0ebe5]"><div className="mx-auto grid max-w-[1240px] gap-12 px-5 py-20 md:grid-cols-[1.1fr_.9fr] md:items-center md:px-8 md:py-28"><div className="relative overflow-hidden rounded-[28px] bg-[#102f3a] p-7 text-[#edf4ee] md:p-10"><div className="absolute -right-10 -top-10 h-48 w-48 rounded-full border border-[#8dd8ca]/20" /><p className="text-[11px] font-bold uppercase tracking-[.22em] text-[#8dd8ca]">Intelligence inside the Y</p><div className="mt-10 grid gap-5 sm:grid-cols-3">{specs.map(([title, text]) => <div key={title} className="border-l border-[#42686b] pl-4"><div className="text-sm font-bold">{title}</div><div className="mt-2 text-xs leading-5 text-[#abc1bd]">{text}</div></div>)}</div><div className="mt-12 flex h-32 items-center justify-center gap-3 rounded-2xl bg-[#173d49]"><div className="h-16 w-12 rounded-lg border border-[#79908e] bg-[#244c55]" /><Zap className="text-[#db8b5f]" size={20} /><div className="h-20 w-28 rounded-xl border border-[#8dd8ca] bg-[#0e7370]/30 p-3"><div className="h-1 w-10 rounded bg-[#8dd8ca]" /><div className="ss-line mt-7 h-1 rounded bg-[#db8b5f]" /></div></div></div><div><p className="text-[11px] font-bold uppercase tracking-[.22em] text-[#0e7370]">Designed for the real world</p><h2 className="mt-5 font-['Playfair_Display'] text-4xl leading-[1.02] tracking-[-.04em] md:text-6xl">Capability,<br /><span className="text-[#0e7370]">not complexity.</span></h2><ul className="mt-8 space-y-4 text-sm text-[#53676b]">{[["Bluetooth", "Secure, low-energy connectivity."], ["Replaceable battery", "Designed for a full day of care."], ["Status LEDs", "Simple visual feedback at a glance."], ["Modular PCBs", "Built for repair, iteration, and scale."]].map(([a,b]) => <li key={a} className="flex items-center gap-3 border-b border-[#cbd7d0] pb-3"><Check size={16} className="text-[#0e7370]" /><span><strong className="text-[#102f3a]">{a}</strong> <span className="ml-1">{b}</span></span></li>)}</ul></div></div></section>
 
