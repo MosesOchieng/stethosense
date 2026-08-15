@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "StethoSense"
+description = "A responsive marketing website for StethoSense, an AI-enabled connected stethoscope designed to help clinicians hear, capture, and understand heart and lung sounds wherever care happens."
+version = "1.0.0"
+id = "artifacts/stethosense-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22584
+
+[services.development]
+run = "pnpm --filter @workspace/stethosense-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/stethosense-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/stethosense-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22584"
+BASE_PATH = "/"
